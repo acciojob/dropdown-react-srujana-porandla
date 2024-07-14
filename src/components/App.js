@@ -140,11 +140,57 @@ const states = [{
 
 function App() 
 {
-	// Do not alter/remove main div
+	const [selectedState, setSelectedState] = useState(states[0]);
+	const [selectedCity, setSelectedCity] = useState(states[0].city[0]);
+	const [selectedLandmark, setSelectedLandmark] = useState(states[0].city[0].landmarks[0]);
+  
+	const handleStateChange = (e) => {
+	  const state = states.find(state => state.name === e.target.value);
+	  setSelectedState(state);
+	  setSelectedCity(state.city[0]);
+	  setSelectedLandmark(state.city[0].landmarks[0]);
+	}
+  
+	const handleCityChange = (e) => {
+	  const city = selectedState.city.find(city => city.name === e.target.value);
+	  setSelectedCity(city);
+	  setSelectedLandmark(city.landmarks[0]);
+	}
+  
+	const handleLandmarkChange = (e) => {
+	  const landmark = selectedCity.landmarks.find(landmark => landmark.name === e.target.value);
+	  setSelectedLandmark(landmark);
+	}
+  
 	return (
-	<div id="main">
-		
-	</div>
+	  <div>
+		<p>States:</p>
+		<select id="state" onChange={handleStateChange}>
+		  {states.map((state, index) => (
+			<option key={index} value={state.name}>{state.name}</option>
+		  ))}
+		  
+		</select>
+        <p>City:</p>
+		<select id="city" onChange={handleCityChange}>
+		  {selectedState.city.map((city, index) => (
+			<option key={index} value={city.name}>City:{city.name}</option>
+		  ))}
+		</select>
+        <p>landmarks:</p>
+		<select id="landmark" onChange={handleLandmarkChange}>
+		  {selectedCity.landmarks.map((landmark, index) => (
+			<option key={index} value={landmark.name}>landmarks:{landmark.name}</option>
+		  ))}
+		</select>
+  
+		<div id="state-name"><h3>{selectedState.name}</h3></div>
+		  <div id="state-description">{selectedState.description}</div>
+		<div id="city-name"><h3>{selectedCity.name}</h3></div>
+		<div id="city-description">{selectedCity.description}</div>
+		<div id="landmark-name"><h3>{selectedLandmark.name}</h3></div>
+		<div id="landmark-description">{selectedLandmark.description}</div>
+	  </div>
 	);
 }
 
