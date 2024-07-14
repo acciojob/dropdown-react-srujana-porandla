@@ -174,18 +174,18 @@ function App()
         <p>City:</p>
 		<select id="city" onChange={handleCityChange}>
 		  {selectedState.city.map((city, index) => (
-			<option key={index} value={city.name}>City:{city.name}</option>
+			<option key={index} value={city.name}>{city.name}</option>
 		  ))}
 		</select>
         <p>landmarks:</p>
 		<select id="landmark" onChange={handleLandmarkChange}>
 		  {selectedCity.landmarks.map((landmark, index) => (
-			<option key={index} value={landmark.name}>landmarks:{landmark.name}</option>
+			<option key={index} value={landmark.name}>{landmark.name}</option>
 		  ))}
 		</select>
   
 		<div id="state-name"><h3>{selectedState.name}</h3></div>
-		  <div id="state-description">{selectedState.description}</div>
+		<div id="state-description">{selectedState.description}</div>
 		<div id="city-name"><h3>{selectedCity.name}</h3></div>
 		<div id="city-description">{selectedCity.description}</div>
 		<div id="landmark-name"><h3>{selectedLandmark.name}</h3></div>
